@@ -1,0 +1,238 @@
+body {
+    margin: 0;
+    text-align: center;
+}
+
+#content{
+    margin-top: 70px;
+    display: inline-block;
+    width: 1000px;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+#content .column{
+    display: inline-block;
+    height: 20px;
+}
+
+#content .itemBox{
+    background-color: #FFFFFF;
+    width: inherit;
+    box-shadow: 0 0 1px 1px #CCCCCC;
+}
+
+#content #left{
+    width: 550px;
+    margin-right: 10px;
+}
+
+#content #left #UserBox{
+    height: auto;
+    background-color: #FFFFFF;
+    width: inherit;
+    box-shadow: 0 0 1px 1px #CCCCCC;
+}
+
+#content #left #UserBox #theme{
+    height: 80px;
+    position: relative;
+}
+
+#content #left #UserBox #theme #themeTitle{
+    position: absolute;
+    left: -20px;
+    top: -15px;
+    width: auto;
+    text-align: center;
+    line-height: 40px;
+    padding-left: 5px;
+    padding-right: 5px;
+    color: #FFFFFF;
+    border-radius: 5px;
+    font-family: clementepdaelight;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+    height: 40px;
+    box-shadow: 0 0 1px 1px #a60000;
+    background-color: #e40000;
+    cursor: default;
+}
+
+#content #left #UserBox #theme #themeTitle b{
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin-left: 8px;
+    background-color: #FFFFFF;
+    border-radius: 50px;
+}
+
+#content #left #UserBox #theme #themeInput{
+    padding: 5px;
+    text-align: center;
+    font-family: clementepdacextralight;
+    font-size: 25px;
+    margin-top: 30px;
+    width: 50%;
+    display: inline-block;
+    border: none;
+    border-bottom: solid 2px #E97E06;
+    cursor: pointer;
+    transition:  ease 0.3s;
+
+}
+
+#content #left #UserBox #autoHide{
+    display: none;
+}
+
+#content #left #UserBox:hover #autoHide{
+    display: block;
+}
+
+#content #left #UserBox:hover #theme #themeInput{
+    width: 90%;
+    border-bottom: solid 2px #1AAF5E;
+}
+
+#content #left #UserBox #theme #themeInput:focus{
+    outline: none;
+    cursor: text;
+    /*width: 90%;*/
+    /*border-bottom: solid 2px #1AAF5E;*/
+}
+
+#content #left #UserBox #tagsArea{
+    padding-bottom: 10px;
+    height: auto;
+    width: inherit;
+    text-align: center;
+}
+
+#content #left #UserBox #tagsArea #tags{
+    display:inline-block;
+    width: 90%;
+    height: auto;
+    /*box-shadow: 0 0 1px 1px #CCCCCC;*/
+    cursor: default;
+    text-align: left;
+}
+
+#content #left #UserBox #tagsArea #tags span{
+    display: inline-block;
+    padding: 10px;
+    background-color: #1AAF5E;
+    color: #FCFCFC;
+    box-shadow: 0 0 1px 1px #008972;
+    margin: 5px;
+    position: relative;
+}
+
+#content #left #UserBox #tagsArea #tags span b{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-image: url("/IMG/cross_red.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    position: absolute;
+    background-color: #FFFFFF;
+    border-radius: 100px;
+    right: -8px;
+    top: -8px;
+    cursor: pointer;
+}
+
+#content #left #UserBox #tagsArea #tags span b:hover{
+    background-color:#227DC5;
+}
+
+#content #left #UserBox #tagsArea #tagInput{
+    margin-top: 5px;
+}
+
+#content #left #UserBox #tagsArea #tagInput input{
+    border: none;
+    display: inline-block;
+}
+
+#content #left #UserBox #tagsArea #tagInput input:focus{
+    outline: none;
+}
+
+#content #left #UserBox #tagsArea #tagInput #tagInputBox{
+    border-bottom: solid 2px #1C68A4;
+    width: 200px;
+    font-size: 15px;
+    text-align: center;
+    font-family: clementepdaelight;
+}
+
+#content #left #UserBox #tagsArea #tagInput #postTagButton{
+    cursor: pointer;
+    background-color:#0067A6;
+    color: #FFFFFF;
+    padding:5px;
+    border-radius: 2px;
+    transition: ease 0.3s;
+    font-family: clementepdaelight;
+    font-size: 15px;
+}
+
+#content #left #UserBox #tagsArea #tagInput #postTagButton:hover{
+    background-color: #E97E06;
+}
+
+#content #left #UserBox #UserButtons{
+    width: inherit;
+    padding-bottom: 5px;
+    text-align: right;
+}
+
+#content #left #UserBox #UserButtons button{
+    border:none;
+    height: 40px;
+    line-height: 40px;
+    margin-right: 10px;
+    font-family: coolveticaregular;
+    font-size: 25px;
+    cursor: pointer;
+    color: #FFFFFF;
+    transition: ease 0.1s;
+    display: inline-block;
+    background-color: transparent;
+    margin-bottom: 5px;
+}
+
+#content #left #UserBox #UserButtons button:hover{
+    padding-bottom: 2px;
+}
+
+#content #left #UserBox #UserButtons button:focus{
+    outline: none;
+}
+
+#content #left #UserBox #UserButtons #submitBtn{
+    color: #bf9b66;
+    border-bottom: solid 2px #725e3f;
+}
+
+#content #left #UserBox #UserButtons #submitBtn:hover{
+    border-bottom: solid 5px #725e3f;
+}
+
+#content #left #UserBox #UserButtons #cancelBtn{
+    color: #444444;
+    border-bottom: solid 2px #222222;
+}
+
+#content #left #UserBox #UserButtons #cancelBtn:hover{
+    border-bottom: solid 5px #222222;
+}
+
+#content #right{
+    width: 350px;
+}

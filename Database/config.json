@@ -1,0 +1,6 @@
+{
+  "HOST":"localhost",
+  "PORT":"27017",
+  "DATABASE":"db",
+  "URI":"mongodb://localhost:27017/db"
+}

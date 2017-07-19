@@ -1,0 +1,21 @@
+{
+  "index":[
+    {"name":"LOGIN","pathname":"Login.js"},
+    {"name":"REG","pathname":"REG.js"},
+    {"name":"ONLINELIST","pathname":"OnlineList.js"},
+    {"name":"FOLLOWING","pathname":"Following.js"},
+    {"name":"STOPFOLLOWING","pathname":"StopFollow.js"},
+    {"name":"CREATEROOM","pathname":"CreateRoom.js"},
+    {"name":"JOINROOM","pathname":"JoinRoom.js"},
+    {"name":"SEARCHROOMS","pathname":"SearchRooms.js"},
+    {"name":"GETTAGS","pathname":"Tags.js"},
+    {"name":"GETUSERINFO","pathname":"GetUserInfo.js"},
+    {"name":"GETROOMINFO","pathname":"GetRoomInfo.js"},
+    {"name":"ROOMMESSAGE","pathname":"RoomMessage.js"},
+    {"name":"ONLINEUSERS","pathname":"OnlineUsers.js"},
+    {"name":"SENDINVITE","pathname":"SendInvite.js"},
+    {"name":"GETINVITATIONS","pathname":"GetInvitations.js"},
+    {"name":"DELETEINVITATION","pathname":"DeleteInvitation.js"},
+    {"name":"ADDFOLLOW","pathname":"AddFollow.js"}
+  ]
+}

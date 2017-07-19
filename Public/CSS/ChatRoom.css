@@ -1,0 +1,212 @@
+body {
+    margin: 20px;
+    text-align: center;
+}
+
+#top_bar{
+    height: 50px;
+    background-color: #fdf9e8;
+    box-shadow: 0 0 1px 1px #CCCCCC;
+    line-height: 50px;
+    cursor: default;
+}
+
+#top_bar #themeName{
+    display: inline-block;
+    font-family: clementepdaksemibold;
+    font-size: 30px;
+    color: #333333;
+}
+
+#top_bar #datetime{
+    margin-left: 10px;
+    display: inline-block;
+    vertical-align:bottom;
+    font-family: clementepdaahairline;
+    color: #666666;
+}
+
+.IMG{
+    cursor: pointer;
+}
+
+#content {
+    margin-top: 20px;
+    display: inline-block;
+    background-color: #FFFFFF;
+    width: 880px;
+    padding: 10px;
+    box-shadow: 0 0 1px 1px #CCCCCC;
+    text-align: center;
+}
+
+#exhibit {
+    display: inline-block;
+    width: 99%;
+    overflow-y: scroll;
+    text-align: center;
+}
+
+#exhibit .message {
+    padding: 5px;
+    box-shadow: 0 0 1px 1px #CCCCCC;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+#exhibit .message .content {
+    display: inline-block;
+    width: auto;
+    max-width: 750px;
+    min-height: 50px;
+    vertical-align: top;
+    text-align: left;
+    padding: 5px;
+    border-left: solid 2px #1AAF5E;
+    word-break: keep-all;
+    position: relative;
+}
+
+#exhibit .message .mycontent {
+    display: inline-block;
+    width: auto;
+    max-width: 750px;
+    min-height: 50px;
+    vertical-align: top;
+    text-align: left;
+    padding: 5px;
+    border-left: solid 2px #E97E06;
+    word-break: keep-all;
+}
+
+#exhibit .message .portrait {
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+    vertical-align: top;
+    box-shadow: 0 0 1px 1px #CCCCCC;
+    margin-right: 10px;
+}
+
+#input_area {
+    text-align: center;
+}
+
+#input_area #tools {
+    display: block;
+    width: 100%;
+    height: 30px;
+    border-top: solid 2px #bf9b66;
+    text-align: left;
+}
+
+#input_area #tools .tool {
+    margin-top: 3px;
+    display: inline-block;
+    height: 26px;
+    line-height: 26px;
+    cursor: default;
+    opacity: 0.9;
+    margin-left: 0px;
+    /*border-left: solid 5px #008972;*/
+    padding-left: 3px;
+    padding-right: 3px;
+    transition: ease 0.2s;
+    font-family: coolveticaregular;
+    font-size: 20px;
+    text-align: center;
+    vertical-align: top;
+    cursor: pointer;
+}
+
+#input_area #tools .tool img {
+    height: 25px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+#input_area #tools .tool a {
+    display: inline-block;
+    height: inherit;
+    line-height: 26px;
+    vertical-align: top;
+    margin-left: 2px;
+    text-align: center;
+}
+
+#input_area #tools .tool .innerTool {
+    display: inline-block;
+    overflow: hidden;
+    height: inherit;
+    line-height: 30px;
+    width: 0px;
+    transition: ease 0.2s;
+}
+
+#input_area #tools .tool .innerTool a {
+    font-size: 17px;
+    margin-left: 8px;
+    font-family: clementepdagbook;
+    height: 26px;
+    display: inline-block;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+#input_area #tools .tool .innerTool a:before {
+    content: '';
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    margin-right: 3px;
+    border-radius: 100%;
+    background-color: #0067A6;
+    vertical-align: middle;
+}
+
+#input_area #tools .tool .innerTool a:hover:before {
+    background-color: #E97E06;
+}
+
+#input_area #tools .tool:hover .innerTool {
+    width: 270px;
+    display: inline-block;
+}
+
+#input_area #text_input {
+    display: inline-block;
+    width: 750px;
+    max-width: 750px;
+    min-height: 90px;
+    vertical-align: top;
+    padding: 10px;
+    border: none;
+    resize: none;
+    box-shadow: 0 0 1px 1px #CCCCCC;
+    margin-top: 5px;
+}
+
+#input_area #text_input:focus {
+    outline: none;
+}
+
+#input_area #button_area {
+    vertical-align: top;
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    margin-top: 5px;
+}
+
+#input_area #button_area button {
+    cursor: pointer;
+    height: 50px;
+    width: 80px;
+    border: none;
+    background-color: #1AAF5E;
+    box-shadow: 0 0 1px 1px #008972;
+    color: #FFFFFF;
+    font-family: clementepdagbook;
+    font-size: 20px;
+}

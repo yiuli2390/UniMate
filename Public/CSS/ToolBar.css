@@ -1,0 +1,28 @@
+#tool_bar{
+    height: 50px;
+    width: inherit;
+    background-color: #F3F6F8;
+    box-shadow: 2px 0px 1px 2px #D9DADB;
+    text-align: center;
+    font-family: clementepdacextralight;
+    font-size: 15px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+#tool_bar ul{
+    margin: 0;
+}
+
+#tool_bar ul li{
+    display: inline-block;
+    line-height: 40px;
+    cursor: pointer;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-top: 5px;
+}
+
+#tool_bar ul li:hover{
+    border-bottom: solid 5px #227DC5;
+}

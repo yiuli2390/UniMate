@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="FONT/Clemente/stylesheet.css">
+    <link rel="stylesheet" href="FONT/coolvetica/stylesheet.css">
+    <link rel="stylesheet" href="CSS/ToolBar.css">
+    <link rel="stylesheet" href="CSS/FollowingCard.css">
+    <link rel="stylesheet" href="CSS/HomePage.css">
+    <script src="JS/socket.io.js"></script>
+    <title>Home Page</title>
+</head>
+<body onload="loadList()">
+<div id="content">
+<!--Room display here-->
+</div>
+</body>
+<script>
+    parent.SOCKET.on('FOLLOWING',function(data){
+        if(data.length!==undefined&&data.length>0){
+            for(var i=0;i<data.length;i++){
+                addCard(data[i].name,data[i].email,data[i].portrait,data[i].status);
+                setTimeout(function(){},10);//for delay 10 ms
+            }
+        }
+        parent.SOCKET.removeListener('FOLLOWING');//remove listener that prevent receive twice data
+    });
+
+    function loadList(){
+        var content=document.getElementById('content');
+        parent.SOCKET.emit('FOLLOWING',{email:parent.userEmail});
+    }
+
+    function addCard(name,email,portraitData,status){
+        try{
+            var card=document.createElement('DIV');
+            card.setAttribute('class','FollowingCard');
+            var portrait=document.createElement('img');
+            portrait.setAttribute('src',portraitData);
+            //var portrait=new Image();
+            //portrait.src=portraitData;
+            var nameLabel=document.createElement('label');
+            nameLabel.setAttribute('class','line');
+            nameLabel.innerHTML=name;
+            var statusLine=document.createElement('DIV');
+            statusLine.setAttribute('class','line');
+            var statusLabel=document.createElement('LABEL');
+            statusLabel.innerHTML='Status:';
+            var statusA=document.createElement('A');
+            if(status==='ONLINE'){
+                statusA.setAttribute('class','online');
+            }else{
+                statusA.setAttribute('class','offline');
+            }
+            statusA.innerHTML=status;
+            var button=document.createElement('BUTTON');
+            button.setAttribute('class','line');
+            button.setAttribute('name',email);
+            button.innerHTML='Stop Follow';
+            button.onclick=function(){
+                parent.SOCKET.emit('STOPFOLLOWING',{clientEmail:parent.userEmail,targetEmail:button.getAttribute('name')});
+                parent.SOCKET.on('STOPFOLLOWING',function(data){
+                    if(data==='success'){
+                        card.style.display='none';
+                        parent.SOCKET.emit('GETUSERINFO',{email:parent.userEmail});
+                    }
+                });
+            }
+            statusLine.appendChild(statusLabel);
+            statusLine.appendChild(statusA);
+            card.appendChild(portrait);
+            card.appendChild(nameLabel);
+            card.appendChild(statusLine);
+            card.appendChild(button);
+            content.appendChild(card);
+        }catch(err){
+            console.log(err.message);
+        }
+    }
+</script>
+</html>

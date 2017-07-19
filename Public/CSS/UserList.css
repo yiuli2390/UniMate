@@ -1,0 +1,179 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+body::selection{
+    background-color: transparent;
+}
+
+ul {
+    display: block;
+    margin: 0 auto;
+    list-style: none;
+    text-align: left;
+    padding: 0;;
+    padding-top: 1px;
+}
+
+ul .selected{
+    background-color:#1C68A4 ;
+    text-shadow: 1px 1px #227DC5;
+}
+
+ul .unselected{
+    background-color: #227DC5;
+}
+
+ul li {
+    display: inline-block;
+    width: 100px;
+    padding: 10px;
+    color: #FFFFFF;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    cursor: pointer;
+    text-align: center;
+}
+
+ul li::selection{
+    background-color: transparent;
+}
+
+#main {
+    border-top: solid 5px #1C68A4;
+    border-top-right-radius: 5px;
+    padding-top: 5px;
+    padding-left: 5px;
+    height: 490px;
+    overflow-y: auto;
+}
+
+#main::selection{
+    background-color: transparent;
+}
+
+#bottomSubmit{
+    position: absolute;
+    bottom: 0px;
+    text-align: center;
+    width: 100%;
+}
+
+#bottomSubmit::selection{
+    background-color: transparent;
+}
+
+#selectIndicator{
+    display: block;
+    font-family: clementepdahbookitalic;
+    text-align: left;
+    cursor: default;
+}
+
+#selectIndicator::selection{
+    background-color: transparent;
+}
+
+#selectIndicator a{
+    display: inline-block;
+}
+
+#selectIndicator a::selection{
+    background-color: transparent;
+}
+
+#bottomSubmit button{
+    display: inline-block;
+    border: none;
+    width: 100px;
+    height: 40px;
+    cursor: pointer;
+    font-family: clementepdaksemibold;
+    font-size: 20px;
+    background-color: #1AAF5E;
+    color: #FFFFFF;
+    box-shadow: 0 0 1px 1px #008972;
+}
+
+#bottomSubmit button:hover{
+    box-shadow: 0 0 1px 1px #0092C7;
+}
+
+#bottomSubmit button:focus{
+    outline: none;
+}
+
+#bottomSubmit button::selection{
+    background-color: transparent;
+}
+
+#main #following{
+    display: block;
+}
+
+#main #all{
+    display: none;
+}
+
+#main .profile {
+    width: 99%;
+    height: 80px;
+    overflow: hidden;
+    line-height: 80px;
+    box-shadow: 0 0 1px 1px #1C68A4;
+    text-align: left;
+    padding: 0px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    position: relative;
+    background-color: #FCFCFC;
+}
+
+#main .profile::selection{
+    background-color: transparent;
+}
+
+#main .profile img {
+    width: 80px;
+    height: 80px;
+    display: inline-block;
+}
+
+#main .profile img::selection{
+    background-color: transparent;
+}
+
+#main .profile a {
+    display: inline-block;
+    width: 90px;
+    height: 80px;
+    line-height: 80px;
+    margin-left: 20px;
+    vertical-align: top;
+    font-family: clementepdaksemibold;
+}
+
+#main .profile a::selection{
+    background-color: transparent;
+}
+
+#main .profile b {
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    width: 40px;
+    height: 80px;
+    position: absolute;
+    top: 0px;
+    right: 3px;
+}
+
+#main .profile .selected{
+    background-image: url("IMG/tick_circle.png");
+}
+
+#main .profile .unselected{
+    background-image: none;
+}

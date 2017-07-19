@@ -1,0 +1,11 @@
+#notification_box{
+    position: absolute;
+    position: absolute;
+    display: block;
+    border:none;
+    border-radius: 3px;
+    background-color: #FCFCFC;
+    width:500px;
+    height: 50px;
+    box-shadow: 0 0 1px 1px #444444;
+}

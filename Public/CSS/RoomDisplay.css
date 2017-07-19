@@ -1,0 +1,251 @@
+body {
+    margin: 70px;
+    text-align: center;
+}
+
+#content {
+    margin-top: 10px;
+    display: inline-block;
+    background-color: #FFFFFF;
+    width: 880px;
+    padding: 10px;
+    box-shadow: 0 0 1px 1px #CCCCCC;
+    text-align: center;
+}
+
+.room {
+    display: inline-block;
+    width: 95%;
+    min-height: 100px;
+    /*background-color: #56A7E0;*/
+    /*background-color: #9FE0F6;*/
+    margin-bottom: 10px;
+    margin-top: 5px;
+    /*box-shadow: 0 0 2px 1px #227DC5;*/
+    /*color: #E6EAEE;*/
+    color: #0092C7;
+    border-top: solid 2px #227DC5;
+    position: relative;
+    font-family: clementepdairegular;
+}
+
+.room:hover{
+    background-color: #FCFCFC;
+}
+
+.room .left {
+    display: inline-block;
+    text-align: left;
+    vertical-align: top;
+    width: 80%;
+    cursor: default;
+    position: relative;
+    margin-left: -4px;
+}
+
+.room .left .line {
+    display: block;
+    /*border-bottom: solid 2px #FFFFFF;*/
+    /*border-bottom: solid 2px #F2572D;*/
+    background-color: #227DC5;
+    padding: 5px;
+    font-size: 20px;
+    width: auto;
+    margin-left: -2px;
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+    position: absolute;
+    left: 0;
+    white-space : nowrap;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    overflow: hidden;
+    max-width: 600px;
+    color: #FFFFFF;
+}
+
+.room .left .line label {
+    /*color: #CCCCCC;*/
+    color: #CCCCCC;
+    font-size: 15px;
+    overflow: hidden;
+    background-color: #97EC71;
+    display: inline-block;
+    height: 15px;
+    width: 15px;
+    border-radius: 100%;
+    margin-right: 3px;
+}
+
+.room .left .line a {
+    /*color: #FCFCFC*/
+    color: #FFFFFF;
+}
+
+.room .left .tagline {
+    display: block;
+    width: auto;
+    padding: 5px;
+    margin-top: 35px;
+}
+
+.room .left .tagline a {
+    color: #444444;
+    /*border-bottom: solid 2px #FFFFFF;*/
+    border-bottom: solid 2px #008972;
+    padding: 1px;
+    padding-bottom: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+    transition: ease 0.2s;
+}
+
+.room .left .tagline a:hover {
+    border-bottom: solid 5px #006B57;
+    padding-bottom: 2px;
+}
+
+.room .left .attenderline {
+    display: block;
+    padding: 5px;
+    font-size: 20px;
+    margin-top: 5px;
+}
+
+.room .left .attenderline .attenders {
+    display: inline-block;
+    vertical-align: top;
+    width: 570px;
+}
+
+.room .left .attenderline .attenders img {
+    vertical-align: top;
+    width: 30px;
+    height: 30px;
+    border-radius: 2px;
+    box-shadow: 0 0 1px 1px #333333;
+    margin-bottom: 5px;
+    margin-left: 5px;
+}
+
+.room .left .attenderline label {
+    font-size: 15px;
+    width: 100px;
+}
+
+.room .right {
+    width: 19%;
+    display: inline-block;
+    text-align: center;
+    vertical-align: top;
+    height: 100px;
+    line-height: 100px;
+    position: relative;
+}
+
+.room .right button {
+    display: inline-block;
+    border: none;
+    cursor: pointer;
+    width: 80px;
+    height: 45px;
+    line-height: 45px;
+    border-radius: 2px;
+    color: #FFFFFF;
+    font-family: coolveticaregular;
+    font-size: 25px;
+    /*box-shadow: 0 0 1px 1px #CCCCCC;*/
+    position: absolute;
+    right: 200px;
+    top: -12px;
+    transition: ease 0.3s;
+    border-top-left-radius: 1px;
+}
+
+.room .right button::selection{
+    outline: none;
+}
+
+.room .right .view_btn {
+    right: 10px;
+    background-color: #F2572D;
+}
+
+.room .right .open_btn {
+    right: 105px;
+    background-color: #EFC028;
+}
+
+.room .right .join_btn {
+    right: 105px;
+    background-color: #00ABD8;
+}
+
+.room .right .view_btn:before {
+    content: '';
+    position: absolute;
+    display: block;
+    width: 0px;
+    height: 0px;
+    left: -10px;
+    top: 0;
+    border-bottom: 10px solid #E04D28;
+    border-left: 10px solid transparent;
+    /*background-color: #227DC5;*/
+}
+
+.room .right .open_btn:before {
+    content: '';
+    position: absolute;
+    display: block;
+    width: 0px;
+    height: 0px;
+    left: -10px;
+    top: 0;
+    border-bottom: 10px solid #DDAF25;
+    border-left: 10px solid transparent;
+    /*background-color: #227DC5;*/
+}
+
+.room .right .join_btn:before {
+    content: '';
+    position: absolute;
+    display: block;
+    width: 0px;
+    height: 0px;
+    left: -10px;
+    top: 0;
+    border-bottom: 10px solid #0096BC;
+    border-left: 10px solid transparent;
+    /*background-color: #227DC5;*/
+}
+
+.room .right button:before {
+    content: '';
+    position: absolute;
+    display: block;
+    width: 0px;
+    height: 0px;
+    left: -10px;
+    top: 0;
+    border-bottom: 10px solid #97EC71;
+    border-left: 10px solid transparent;
+    /*background-color: #227DC5;*/
+}
+
+.room .right button:hover {
+    color: #FCFCFC;
+    padding-bottom: 100px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.room .right .join {
+    /*background-color: #1AAF5E;*/
+    background-color: #008972;
+}
+
+.room .right .enter {
+    /*background-color: #6B9AFF;*/
+    background-color: #97EC71;
+}

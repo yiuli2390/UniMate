@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="CSS/Frame.css">
+    <link rel="stylesheet" href="FONT/coolvetica/stylesheet.css">
+    <link rel="stylesheet" href="FONT/clemente/stylesheet.css">
+    <link rel="stylesheet" href="CSS/notificationBox.css">
+    <script src="JS/NewLayer.js"></script>
+    <script src="JS/socket.io.js"></script>
+    <script src="JS/Frame.js"></script>
+    <script src="JS/server.js"></script>
+    <title>UniMate</title>
+    <script>
+        var currentRoomId = null;
+        var layer = null;
+        var SOCKET = io.connect(server);
+        SOCKET.on('disconnect', function (data) {
+            //when server is closed
+        });
+    </script>
+    <script>
+        var userName = null;
+        var userEmail = null;
+        var userPortraitData = null;
+        var myFollowing = [];
+        var onlineList = null;
+        SOCKET.on('GETUSERINFO',function(result){
+            if(result.data.following!=null){
+                myFollowing=result.data.following;
+            }else{
+                myFollowing=[];
+            }
+        });
+    </script>
+</head>
+<body>
+<header id="header">
+    <div id="header_logo" onclick="Home_Click()">
+        <img src="IMG/logo.svg">
+    </div>
+
+    <div id="header_search">
+        <input type="text" id="header_search_box" placeholder="Search answers for your question">
+        <input type="button" id="header_search_button" onclick="search()">
+    </div>
+    <div id="header_user_info">
+        <div id="header_user_panel" style="display: none">
+            <div id="header_user_portrait" class="innerElement">
+                <img src="" id="portrait_img">
+            </div>
+            <div id="header_user_name" class="innerElement"><!--User name--></div>
+            <div id="header_user_setting" class="innerElement"></div>
+        </div>
+        <div id="header_sign_panel">
+            <div class="reg_panel" id="header_reg" onclick="buildLayer('register',2)">Register</div>
+            <div class="reg_panel" id="header_sign_in" onclick="buildLayer('login',1)">Sign in</div>
+        </div>
+    </div>
+</header>
+<div id="side_bar">
+    <ul>
+        <li onclick="Home_Click()"><img src="IMG/home.png"><a>HOME</a><b/></li>
+        <li onclick="Tags_Click()"><img src="IMG/tags.png"><a>TAGS</a></li>
+        <li onclick="Invite_Click()"><span class="unread" id="unread_invitations">0</span><img
+                src="IMG/inviteMe.png"><a>INVITATION</a><b/></li>
+        <li onclick="Chatting_Click()" id="chatting_li" style="display: none"><span class="unread" id="unread_messages">0</span><img SRC="IMG/chatting.png"><a>CHATTING</a><b/>
+        </li>
+        <li onclick="Following_Click()"><img SRC="IMG/friends.png"><a>FOLLOWING</a><b/></li>
+    </ul>
+</div>
+<div id="main">
+    <iframe id="main_frame" src=""></iframe>
+</div>
+</body>
+</html>
+<script>
+    var setStyle = new setStyle();
+    setStyle.init();
+
+    function buildLayer(uri, STYLE_TYPE_ID) {
+        layer = new NewLayer(uri, STYLE_TYPE_ID);
+        layer.Start();
+    }
+
+    function showUserInfo() {
+        if (userName !== null && userEmail !== null && userPortraitData !== null) {
+            var user_panel = document.getElementById('header_user_panel');
+            var sign_panel = document.getElementById('header_sign_panel');
+            var portrait_img = document.getElementById('portrait_img');
+            var username = document.getElementById('header_user_name');
+            user_panel.style.display = 'inline-block';
+            sign_panel.style.display = 'none';
+            portrait_img.src = userPortraitData;
+            username.innerHTML = userName;
+            refreshOnlineList();
+        } else {
+            alert("User's details load fail, please try login again.");
+        }
+    }
+
+    function refreshOnlineList() {
+        SOCKET.emit('ONLINELIST', null);
+        SOCKET.on('ONLINELIST', function (data) {
+            onlineList = data;
+        })
+    }
+</script>
+<script>
+    var unread_messages = document.getElementById('unread_messages');
+    var unread_count = 0;
+
+    var unread_invitations = document.getElementById('unread_invitations');
+    var invitations_count = 0;
+
+    var main_frame = document.getElementById('main_frame');
+    function MainFrameHref(uri) {
+        main_frame.src = uri;
+    }
+    function Home_Click() {
+        homePage();
+    }
+
+    function Tags_Click() {
+        MainFrameHref('tags');
+    }
+
+    function Invite_Click() {
+        invitations_count = 0;
+        setUnreadInvitations(0);
+        MainFrameHref('invitations');
+    }
+
+    function Chatting_Click() {
+        if (currentRoomId != null) {
+            unread_count = 0;
+            setUnreadMessages(0);
+            MainFrameHref('chatting?' + currentRoomId);
+        }
+    }
+
+    function Following_Click() {
+        MainFrameHref('following');
+    }
+
+    function homePage() {
+        if (userEmail != null) {
+            MainFrameHref('userhomepage');
+        } else {
+            MainFrameHref('publichomepage');
+        }
+    }
+
+    document.getElementById("header_search_box").onkeydown=function(evt){
+        if(evt.keyCode===13){
+            search();
+        }
+    }
+
+    function search() {
+        var inputBox = document.getElementById('header_search_box');
+        var keywords = inputBox.value;
+        if (keywords != "") {
+            var data = "KEYWORDS&" + keywords;
+            MainFrameHref('roomsdisplay?' + data);
+            inputBox.value="";
+        } else {
+            alert('Please input question');
+        }
+    }
+
+</script>
+<script>
+
+    function RegPersonalSocket() {
+        if (userEmail != null) {
+            SOCKET.on(userEmail, function (data) {
+                switch (data.title) {
+                    case 'INVITATION':
+                    {
+                        //receive a invitation
+                        var inviterName = data.inviter;
+                        var room_id = data.room_id;
+                        invitations_count += 1;
+                        setUnreadInvitations(invitations_count);
+                    }
+                        break;
+                    default :
+                    {
+                        //Default operations
+                    }
+                }
+            });
+        }
+    }
+
+    SOCKET.on('CREATEROOM', function (data) {
+        if (data.room_id !== undefined) {
+            MainFrameHref('chatting?' + data.room_id);
+            main_frame.contentWindow.clearAllInput();
+        }
+    });
+
+    //Initilize the unread messages
+    setUnreadMessages(0);
+    setUnreadInvitations(0);
+
+    function setUnreadMessages(number) {// for set unread message circle inside number
+        var url = main_frame.contentWindow.location.href;
+        var arr = url.split('?');
+        var para = arr[0];
+        var len = para.length;
+        var tmp_name = para.substr(len - 8, len);
+        if (tmp_name.localeCompare('chatting') === 0) {
+            number = 0;
+            unread_count = 0;
+        }
+        if (number > 0) {
+            unread_messages.style.display = 'block';
+            if (number > 99) {
+                unread_messages.innerHTML = '99+';
+            } else {
+                unread_messages.innerHTML = number;
+            }
+        } else {
+            unread_messages.style.display = 'none';
+        }
+    }
+
+    function setUnreadInvitations(number) {
+        if (number > 0) {
+            unread_invitations.style.display = 'block';
+            if (number > 99) {
+                unread_invitations.innerHTML = '99+';
+            } else {
+                unread_invitations.innerHTML = number;
+            }
+        } else {
+            unread_invitations.style.display = 'none';
+        }
+    }
+
+    function switchSideBar() {
+        var sidebar = document.getElementById("side_bar");
+        var main = document.getElementById("main");
+        if (userEmail == null) {
+            sidebar.style.visibility = "hidden";
+            main.style.marginLeft = "0px";
+            main.style.width = window.innerWidth + "px";
+            Home_Click();
+        } else {
+            sidebar.style.visibility = "visible";
+            main.style.marginLeft = "205px";
+            main.style.width = window.innerWidth - 205 + "px";
+            Home_Click();
+        }
+    }
+
+    switchSideBar();
+</script>

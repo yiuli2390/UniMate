@@ -1,0 +1,32 @@
+body{
+    margin: 0;
+    text-align: center;
+}
+#content{
+    margin-top: 70px;
+    margin-left: 70px;
+    display: inline-block;
+    background-color: #FFFFFF;
+    width: 880px;
+    padding: 10px;
+    box-shadow: 0 0 1px 1px #CCCCCC;
+    text-align: center;
+}
+
+.tag{
+    padding: 15px;
+    display: inline-block;
+    border-radius: 5px;
+    text-align: center;
+    margin: 5px;
+    color: #FFFFFF;
+    text-shadow: 0 0 1px 1px #DDDDDD;
+    cursor: pointer;
+    transition: ease 0.1s;
+    font-family: clementepdaelight;
+    font-size: 20px;
+}
+.tag:hover{
+    padding: 17px;
+    margin: 3px;
+}

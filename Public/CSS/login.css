@@ -1,0 +1,46 @@
+h1{
+    font-family: coolveticaregular;
+}
+form{
+    text-align: center;
+}
+form .line{
+    display: block;
+    width: inherit;
+    margin-bottom: 10px;
+    text-align: center;
+}
+form .line label{
+    display: inline-block;
+    width: 100px;
+    font-family: clementepdairegular;
+    font-size: 20px;
+}
+
+form .line .box{
+    box-shadow: 0 0 1px 1px #227DC5;
+}
+
+form .line input{
+    border: none;
+    display: inline-block;
+    height: 30px;
+    width: 300px;
+    border-radius: 5px;
+    text-align: center;
+    font-family: clementepdacextralight;
+    font-size: 20px;
+}
+
+#submit{
+    margin-top: 10px;
+    font-family: clementepdambold;
+    height: 40px;
+    cursor: pointer;
+    background-color: #1AAF5E;
+    color: #FFFFFF;
+    transition: ease 0.1s;
+}
+#submit:hover{
+    box-shadow: 0 0 1px 1px #227DC5;
+}

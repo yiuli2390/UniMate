@@ -1,0 +1,227 @@
+var room_id = window.location.search.substr(1);
+var portraits = [];
+var attendees = [];
+var Room_Tags = null;
+
+if (parent.currentRoomId != null && parent.currentRoomId.localeCompare(room_id) != 0) {
+    parent.SOCKET.removeListener(parent.currentRoomId);
+    parent.currentRoomId = room_id;
+}
+parent.currentRoomId = room_id;
+parent.SOCKET.removeListener(room_id);
+parent.SOCKET.on(room_id, function (data) {
+    if (room_id === parent.currentRoomId) {
+        parent.unread_count++;
+        parent.setUnreadMessages(parent.unread_count);
+        showMessage(data);
+    }
+});
+
+if(parent.document.getElementById("chatting_li").style.display==="none"){
+    parent.document.getElementById("chatting_li").style.display="block";
+}
+
+function isContained(array, obj) {
+    for (var i = 0; i < array.length; i++) {
+        if (array[i] === obj) {
+            return true;
+        }
+    }
+    return false;
+}
+
+parent.SOCKET.on('GETUSERINFO', function (data) {
+    var portraitData = {name: data.id, portrait: data.data.portrait};
+    if (!isContained(portraits, portraitData)) {
+        portraits.push(portraitData);
+        var items = document.getElementsByName(data.id);
+        for (var i = 0; i < items.length; i++) {
+            items.item(i).src = data.data.portrait;
+        }
+    }
+});
+function getUserPortraitInfo(attendees) {
+    for (var i = 0; i < attendees.length; i++) {
+        var data = {email: attendees[i], id: attendees[i]};
+        parent.SOCKET.emit('GETUSERINFO', data);
+    }
+}
+
+function gotoBottom() {
+    exhibit.scrollTop = exhibit.scrollHeight;
+}
+
+var textArea = document.getElementById('text_input');
+
+textArea.onkeydown = function (e) {
+    if (e.keyCode === 13) {
+        if (!e.ctrlKey) {
+            sendBtn.click();
+            return false;
+        }
+    }
+}
+
+var sendBtn = document.getElementById('send_button');
+
+sendBtn.onclick = function () {
+    var message = textArea.value;
+    var data = {room_id: room_id, type: "TXT", message: message, senderEmail: parent.userEmail};
+    var localData = {
+        senderName: parent.userName,
+        senderPortrait: parent.userPortraitData,
+        type: "TXT",
+        message: message,
+        senderEmail: parent.userEmail,
+        datetime: Date.now()
+    };
+    parent.SOCKET.emit('ROOMMESSAGE', data);
+    textArea.value = null;
+}
+
+
+function loadRecord() {
+    var themeNameContainer=document.getElementById('themeName');
+    var datetimeContainer=document.getElementById('datetime');
+    var data = {room_id: room_id};
+    parent.SOCKET.emit('GETROOMINFO', data);
+    parent.SOCKET.on('GETROOMINFO', function (data) {
+        parent.SOCKET.removeListener('GETROOMINFO');
+        var content = data.content;
+        themeNameContainer.innerHTML=data.theme;
+        var datetime=new Date(data.datetime);
+        var datetimeStr=datetime.getFullYear()+'/'+correctNumber(datetime.getMonth())+'/'+correctNumber(datetime.getDate())+' '+correctNumber(datetime.getHours())+':'+correctNumber(datetime.getMinutes())+":"+correctNumber(datetime.getSeconds());
+        datetimeContainer.innerHTML=datetimeStr;
+        Room_Tags = data.tags;
+        attendees = data.attenders;
+        for (var i = 0; i < content.length; i++) {
+            showMessage(content[i]);
+        }
+        //getUserPortraitInfo(attendees);//get users information, already abandoned
+    });
+
+    function correctNumber(number){
+        if(number.toString().length<2){
+            number='0'+number;
+        }
+        return number;
+    }
+
+}
+
+function showMessage(singleData) {
+    var type = singleData.type;
+    var message = singleData.message;
+    var senderEmail = singleData.senderEmail;
+    var datetime = singleData.datetime;
+    //create elements
+    var messageBox = document.createElement('DIV');
+    messageBox.setAttribute('class', 'message');
+    var img = document.createElement('IMG');
+    img.setAttribute('src', singleData.senderPortrait);
+    img.setAttribute('class', 'portrait');
+    img.setAttribute('name', senderEmail);
+    var content = document.createElement('DIV');
+    var contentClassName = 'content';
+    if (senderEmail.localeCompare(parent.userEmail) === 0) {
+        contentClassName = 'mycontent';
+    }else{
+        //show userinfo box
+        img.onmouseover = function (e) {
+            var profile_box = new notificationBox();
+            //alert(exhibit.scrollHeight);
+            profile_box.showBox(img.offsetLeft + img.offsetWidth - 10, e.clientY, 'miniprofile?'+senderEmail);
+            this.onmouseout = function () {
+                setTimeout(function(){
+                    if(!profile_box.isInside()){
+                        profile_box.removeBox();
+                    }
+                },10);
+            }
+        }
+    }
+    content.setAttribute('class', contentClassName);
+    switch (type) {
+        case 'IMG':
+        {
+            content.innerHTML = "<img src='"+message+"' class='IMG' height='200' onclick='presentImg("+'"'+message+'"'+")'>";
+        }
+            break;
+        case 'TXT':
+        {
+            content.innerHTML = message;
+        }
+            break;
+    }
+    messageBox.appendChild(img);
+    messageBox.appendChild(content);
+    exhibit.appendChild(messageBox);
+    gotoBottom();
+}
+
+invite.onclick = function () {
+    var tmp = '';
+    for (var i = 0; i < Room_Tags.length; i++) {
+        tmp += Room_Tags[i].tag;
+        if (i != Room_Tags.length - 1) {
+            tmp += '&';
+        }
+    }
+    parent.buildLayer('onlineusers?' + parent.userEmail + '&' + room_id + '&' + tmp, 3);
+}
+
+
+function notificationBox() {
+    var isInside=false;
+    var box = document.createElement('IFRAME');
+    box.setAttribute('ID','notification_box');
+    var body=document.body;
+    this.showBox = function (left, top, uri) {
+        box.style.left=left+'px';
+        box.style.top=top+'px';
+        box.setAttribute('SRC', uri);
+        body.appendChild(box);
+    }
+
+    box.onmouseover=function(){
+        isInside=true;
+        box.onmouseout=function(){
+            isInside=false;
+            body.removeChild(box);
+        }
+    }
+
+    this.removeBox = function () {
+        body.removeChild(box);
+    }
+
+    this.isInside=function(){
+        return isInside;
+    }
+}
+
+function openImage(){
+    var image_input=document.getElementById("ImageFile");
+    image_input.click();
+    image_input.onchange=function(){
+        var reader=new FileReader();
+        reader.readAsDataURL(this.files[0]);
+        reader.onload=function(e){
+            var message = this.result;
+            var data = {room_id: room_id, type: "IMG", message: message, senderEmail: parent.userEmail};
+            var localData = {
+                senderName: parent.userName,
+                senderPortrait: parent.userPortraitData,
+                type: "IMG",
+                message: message,
+                senderEmail: parent.userEmail,
+                datetime: Date.now()
+            };
+            parent.SOCKET.emit('ROOMMESSAGE', data);
+        }
+    }
+}
+
+function presentImg(data){
+    window.open(data);
+}

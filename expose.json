@@ -1,0 +1,16 @@
+{
+  "index":"index.html",
+  "login":"login.html",
+  "register":"reg.html",
+  "following":"following.html",
+  "tags":"tags.html",
+  "roomsdisplay":"RoomsDisplay.html",
+  "chatting":"chatting.html",
+  "viewing":"viewing.html",
+  "miniprofile":"miniProfile.html",
+  "userhomepage":"UserHomePage.html",
+  "publichomepage":"PublicHomePage.html",
+  "onlineusers":"onlineUsers.html",
+  "invitations":"invitations.html",
+  "this_is_a_test":"test.html"
+}

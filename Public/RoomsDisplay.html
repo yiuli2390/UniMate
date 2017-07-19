@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="FONT/Clemente/stylesheet.css">
+    <link rel="stylesheet" href="FONT/coolvetica/stylesheet.css">
+    <link rel="stylesheet" href="CSS/RoomDisplay.css">
+    <script src="JS/socket.io.js"></script>
+    <script src="JS/server.js"></script>
+    <title>Display Rooms</title>
+    <script>
+        var data_obj = null;
+        var data = window.location.search.substr(1);
+        var data_arr = data.split("&");
+        var type = data_arr[0];
+        if (type.localeCompare('TAG') === 0) {
+            //get by tag
+            var tagName = data_arr[1];
+            data_obj = {type: "TAG", tagName: tagName};
+        } else if(type.localeCompare('KEYWORDS')===0){
+            //get by keywords
+            var keywords=data_arr[1];
+            data_obj={type:"KEYWORDS",KeyWords:keywords};
+        }else{
+            //get all
+            data_obj = {type: "ALL"};
+        }
+    </script>
+</head>
+<body>
+<div id="content">
+ <!--Room display here-->
+</div>
+</body>
+</html>
+<script>
+    var content = document.getElementById('content');
+    var tmp_socket = new io.connect(server);
+    tmp_socket.on('GETUSERINFO', function (RecvData) {
+        if (RecvData != null) {
+            var id = RecvData.id;
+            var UserData = RecvData.data;
+            var img = new Image();
+            img.src = UserData.portrait;
+            img.title = UserData.name;
+            document.getElementById(id).appendChild(img);
+        }
+    });
+    if (data_obj != null) {
+        parent.SOCKET.emit('SEARCHROOMS', data_obj);
+        parent.SOCKET.on('SEARCHROOMS', function (RoomsData) {
+            parent.SOCKET.removeListener('SEARCHROOMS');//remove listener
+            for (var i = RoomsData.length-1; i >-1 ; i--) {
+                //create room card
+                new Bar(RoomsData[i]);
+            }
+            //loadLoop(obj_array);
+        });
+    } else {
+        document.write('Page load error');
+    }
+
+    parent.SOCKET.on('JOINROOM', function (data) {
+        parent.SOCKET.removeListener('JOINROOM');
+        if (data.result) {
+            var theme = data.theme;
+            var emcee = data.emcee;
+            var room_id = data.room_id;
+            parent.currentRoomId = room_id;
+            window.location.href = 'chatting?' + room_id;
+        } else {
+            alert('Fail to join this room');
+        }
+    });
+
+    function Bar(obj) {
+        var id = obj._id;
+        var emcee = obj.emcee;
+        var theme = obj.theme;
+        var datetime = obj.datetime;
+        var tags = obj.tags;
+        var attenders = obj.attenders;
+        var room = document.createElement('DIV');
+        room.setAttribute('class', 'room');
+        var left = document.createElement('DIV');
+        left.setAttribute('class', 'left');
+        var right = document.createElement('DIV');
+        right.setAttribute('class', 'right');
+        var line = document.createElement('DIV');
+        var themeLabel = document.createElement('LABEL');
+        var themeName = document.createElement('A');
+        themeName.innerHTML = theme;
+        line.appendChild(themeLabel);
+        line.appendChild(themeName);
+        line.setAttribute('class', 'line');
+        var tagline = document.createElement('DIV');
+        var tagLabel = document.createElement('LABEL');
+        tagLabel.innerHTML = 'TAGS:';
+        tagline.appendChild(tagLabel);
+        for (var t = 0; t < tags.length; t++) {
+            var tagName = document.createElement('A');
+            tagName.innerHTML = tags[t].tag;
+            tagline.appendChild(tagName);
+        }
+        tagline.setAttribute('class', 'tagline');
+        var attenderline = document.createElement('DIV');
+        var attenderLabel = document.createElement('LABEL');
+        attenderLabel.innerHTML = 'ATTENDEES:';
+        attenderline.appendChild(attenderLabel);
+        var attendersDIV = document.createElement('DIV');
+        attendersDIV.setAttribute('class', 'attenders');
+        attendersDIV.setAttribute('id', id);
+        attenderline.appendChild(attendersDIV);
+        attenderline.setAttribute('class', 'attenderline');
+        left.appendChild(line);
+        left.appendChild(tagline);
+        left.appendChild(attenderline);
+
+        var button = document.createElement('BUTTON');
+        var txt = null;
+        if (isContain(attenders, parent.userEmail)) {
+            txt = "Enter";
+            button.setAttribute('class', 'join_btn');
+        } else {
+            txt = "Join";
+            button.setAttribute('class', 'open_btn');
+        }
+        button.innerHTML = txt;
+        button.onclick = function () {
+            //join the room
+            var sendData = {email: parent.userEmail, room_id: id};
+            parent.SOCKET.emit('JOINROOM', sendData);
+        }
+
+        var view_btn = document.createElement('BUTTON');
+        view_btn.onclick=function(){
+            parent.currentRoomId = obj._id;
+            window.location.href = 'viewing?' + obj._id;
+        }
+        view_btn.innerHTML='View';
+        view_btn.setAttribute('CLASS','view_btn');
+        if(parent.userEmail!=null){
+            right.appendChild(button);
+        }
+        right.appendChild(view_btn);
+        room.appendChild(left);
+        room.appendChild(right);
+        content.appendChild(room);
+        for (var a = 0; a < attenders.length; a++) {
+            var sendData = {id: id, email: attenders[a]};
+            tmp_socket.emit('GETUSERINFO', sendData);
+        }
+    }
+
+    function isContain(arr, obj) {
+        for (var i = 0; i < arr.length; i++) {
+            if (arr[i] === obj) {
+                return true;
+            }
+        }
+        return false;
+    }
+</script>

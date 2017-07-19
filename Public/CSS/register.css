@@ -1,0 +1,73 @@
+h1{
+    font-family: coolveticaregular;
+    margin-top: 5px;
+    margin-bottom: 0;
+}
+h3{
+    font-family: clementepdahbookitalic;
+    padding: 0;
+    margin: 0;
+    color: #381F00;
+}
+form{
+    text-align: center;
+}
+form .line{
+    display: block;
+    width: inherit;
+    margin-bottom: 10px;
+    text-align: center;
+}
+form .line label{
+    display: inline-block;
+    width: 200px;
+    font-family: clementepdairegular;
+    font-size: 20px;
+}
+
+form .line .box{
+    box-shadow: 0 0 1px 1px #381F00;
+}
+
+form .line input{
+    border: none;
+    display: inline-block;
+    height: 30px;
+    width: 300px;
+    border-radius: 5px;
+    text-align: center;
+    font-family: clementepdacextralight;
+    font-size: 20px;
+}
+
+.submit{
+    border: none;
+    text-align: center;
+    border-radius: 5px;
+    display: inline-block;
+    width: 300px;
+    margin-top: 10px;
+    font-family: clementepdambold;
+    height: 40px;
+    cursor: pointer;
+    background-color: #a67347;
+    color: #FFFFFF;
+    transition: ease 0.1s;
+}
+.submit:hover{
+    box-shadow: 0 0 1px 1px #FFFFFF;
+}
+
+#selectImage{
+    height: 30px;
+    font-size: 15px;
+    background-color: #1C68A4;
+}
+
+#canvas{
+    background-color:#FFFFFF;
+    width: 300px;
+    height: 300px;
+    border-radius: 5px;
+    box-shadow: 0 0 2px 2px #381F00;
+}

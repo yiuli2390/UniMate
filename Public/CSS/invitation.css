@@ -1,0 +1,177 @@
+body {
+    margin: 0;
+    text-align: center;
+}
+
+#content{
+    margin-top: 70px;
+    display: inline-block;
+    width: 1000px;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+#content .invitation{
+    width: 80%;
+    display: inline-block;
+    height: 100px;
+    background-color: #FFFFFF;
+    box-shadow: 0 0 1px 1px #CCCCCC;
+    position: relative;
+    cursor: pointer;
+    margin-bottom: 10px;
+    transition:  ease 0.3s;
+}
+
+#content .invitation:hover .read_status_unread{
+    padding-bottom: 20px;
+}
+
+#content .invitation .read_status_unread{
+    position: absolute;
+    background-color: #EA5455;
+    width: 60px;
+    text-align: center;
+    padding: 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: #FFFFFF;
+    font-family: clementepdaahairline;
+    font-size: 20px;
+    left: 0px;
+    top: 0px;
+    cursor: default;
+    transition: ease 0.4s;
+    box-shadow: 1px 1px 1px 1px #D64D55;
+}
+
+#content .invitation .read_status_read{
+    position: absolute;
+    background-color: #1AAF5E;
+    width: 60px;
+    text-align: center;
+    padding: 5px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: #FFFFFF;
+    font-family: clementepdaahairline;
+    font-size: 20px;
+    left: 0px;
+    top: 0px;
+    cursor: default;
+    transition: ease 0.4s;
+    box-shadow: 1px 1px 1px 1px #008972;
+    border-bottom-right-radius: 20px;
+}
+
+#content .invitation .read_status_read::selection{
+    background-color: transparent;
+}
+
+#content .invitation .read_status_unread::selection{
+    background-color: transparent;
+}
+
+#content .invitation .theme{
+    margin-left: 80px;
+    width: 700px;
+    height: 20px;
+    border-bottom: solid 2px #1C68A4;
+    padding: 5px;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    font-family: clementepdaksemibold;
+    font-size: 20px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    overflow: hidden;
+    color: #333333;
+}
+
+#content .invitation .emceeInfo{
+    position: absolute;
+    text-align: left;
+    left: 80px;
+    height: 30px;
+    line-height: 30px;
+    padding: 5px;
+    width: auto;
+    border-bottom: solid 2px #E97E06;
+}
+
+#content .invitation .emceeInfo img{
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+    box-shadow: 0 0 1px 1px #CCCCCC;
+}
+
+#content .invitation .emceeInfo a{
+    display: inline-block;
+    font-family: clementepdahbookitalic;
+    margin-left: 5px;
+    color: #444444;
+    vertical-align: top;
+    width: auto;
+    max-width: 100px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    overflow: hidden;
+    height: 30px;
+}
+
+#content .invitation .emceeInfo b{
+    display: inline-block;
+    margin-left: 5px;
+    vertical-align: top;
+    font-family: clementepdagbook;
+    color: #333333;
+}
+
+#content .invitation .invitationInfo{
+    position: absolute;
+    right: 3px;
+    bottom: 3px;
+    color: #777777;
+    font-family: clementepdaelight;
+    font-size: 15px;
+}
+
+#content .invitation .invitationInfo a{
+    font-family: clementepdahbookitalic;
+    margin-right: 5px;
+    max-width: 100px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    overflow: hidden;
+    max-width: 100px;
+    display: inline-block;
+    vertical-align: bottom;
+}
+
+#content .invitation .del{
+    display: block;
+    position: absolute;
+    width: 20px;
+    height: 0;
+    right: 3px;
+    top: 3px;
+    background-image: url("/IMG/invitationClose.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    transition: ease 0.3s;
+}
+
+#content .invitation:hover .del{
+    height: 20px;
+    z-index: 1000000;
+}
+
+#content .invitation .del:hover{
+    box-shadow: 0 0 1px 1px #CCCCCC;
+}

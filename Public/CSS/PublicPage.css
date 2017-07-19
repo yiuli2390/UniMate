@@ -1,0 +1,38 @@
+#big_logo{
+    height: 300px;
+    display: block;
+    margin: 80px auto 30px auto;
+}
+
+#big_search_area{
+    text-align: center;
+}
+
+input{
+    display: inline-block;
+    height: 50px;
+    font-size: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#big_search_box{
+    width: 500px;
+    box-shadow: 0 0 1px 1px #999999;
+    border: none;
+    vertical-align: middle;
+    font-family: "Helvetica Neue Light", "Lucida Grande", "Calibri", "Arial", sans-serif;
+}
+
+#big_search_button{
+    vertical-align: middle;
+    height: 56px;
+    width: 100px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    font-size: 20px;
+    color: #FFFFFF;
+    background-color: #381F00;
+    font-family: "Helvetica Neue Light", "Lucida Grande", "Calibri", "Arial", sans-serif;
+}

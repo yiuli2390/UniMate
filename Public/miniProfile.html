@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="FONT/Clemente/stylesheet.css">
+    <link rel="stylesheet" href="CSS/profile.css">
+    <script src="JS/socket.io.js"></script>
+    <script src="JS/server.js"></script>
+    <title>User Profile Mini</title>
+    <script>
+        var useremail=window.location.search.substr(1);
+        var miniSocket = io.connect(server);
+    </script>
+</head>
+<body>
+<div id="card">
+    <label id="username_label"></label>
+    <button id="follow_button"></button>
+</div>
+</body>
+</html>
+<script>
+    miniSocket.emit('GETUSERINFO',{email:useremail});
+    miniSocket.on('GETUSERINFO',function(data){
+        var username=document.getElementById('username_label');
+        username.innerHTML=data.data.name;
+        var obj={email:useremail};
+        var btn=document.getElementById('follow_button');
+        if(isInside(parent.parent.myFollowing,useremail)){
+            //already follow
+            btn.setAttribute('CLASS','stop_follow');
+            btn.innerHTML='CANCEL';
+            btn.onclick=function(){
+                updateFollowingList();
+                var sendData={clientEmail:parent.parent.userEmail,targetEmail:useremail};
+                miniSocket.emit('STOPFOLLOWING',sendData);
+                miniSocket.on('STOPFOLLOWING',function(result){
+                    parent.document.getElementById('notification_box').style.display='none';
+                });
+            }
+        }else{
+            //didn't follow
+            btn.setAttribute('CLASS','follow');
+            btn.innerHTML='FOLLOW';
+            btn.onclick=function(){
+                var sendData={userEmail:parent.parent.userEmail,followEmail:useremail};
+                miniSocket.emit('ADDFOLLOW',sendData);
+                miniSocket.on('ADDFOLLOW',function(data){
+                    miniSocket.removeListener('ADDFOLLOW');
+                    if(data!=null){
+                        if(data.result){
+                            //success
+                            updateFollowingList();
+                            parent.document.getElementById('notification_box').style.display='none';
+                        }else{
+                            //fail
+                            alert(data.reason);
+                        }
+                    }else{
+                        alert('Server error');
+                    }
+                });
+            }
+        }
+        if(parent.parent.userEmail===null){
+            btn.style.display="none";
+            parent.document.getElementById('notification_box').style.width=username.offsetWidth+50+'px';
+        }else{
+            parent.document.getElementById('notification_box').style.width=username.offsetWidth+120+'px';
+        }
+    });
+
+    function isInside(array,email){
+        for(var i=0;i<array.length;i++){
+            if(array[i].email===email){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    function updateFollowingList(){
+        var data={email:parent.parent.userEmail};
+        parent.parent.SOCKET.emit('GETUSERINFO',data);
+//        miniSocket.emit('GETUSERINFO',data);
+//        miniSocket.on('GETUSERINFO',function(result){
+//            parent.parent.myFollowing=result.data.following;
+//        });
+    }
+</script>

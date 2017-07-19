@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <link rel="stylesheet" href="FONT/Clemente/stylesheet.css">
+    <link rel="stylesheet" href="CSS/register.css">
+</head>
+<body>
+<form id="step_one" target="IFRAME" onsubmit="stepOne()" style="display: block;">
+    <div class="line">
+        <h1>Register [Step 1]</h1>
+    </div>
+    <div class="line">
+        <h3>Join UniMate today</h3>
+    </div>
+    <div class="line">
+        <label>Name</label><input type="text" id="name" required="yes" class="box" placeholder="Your user name">
+    </div>
+    <div class="line">
+        <label>Email</label><input type="text" id="email" required="yes" class="box" placeholder="Your email address">
+    </div>
+    <div class="line">
+        <label>Password</label><input type="password" id="password" required="yes" class="box" placeholder="Your password">
+    </div>
+    <div class="line">
+        <label>Password confirm</label><input type="password" id="password_confirm" required="yes" class="box" placeholder="Confirm your password">
+    </div>
+    <div class="line">
+        <input type="submit" id="step_one_next" value="Next" class="submit">
+    </div>
+</form>
+<form id="step_two" target="IFRAME" onsubmit="stepTwo()" style="display: none;">
+    <div class="line">
+        <h1>Register [Step 2]</h1>
+        <h3>Upload a portrait</h3>
+    </div>
+    <div class="line">
+        <canvas id="canvas"></canvas>
+    </div>
+    <div class="line">
+        <button id="selectImage" class="submit">Select Image...</button>
+        <input type="file" id="file" style="display: none;">
+    </div>
+    <div class="line">
+        <input type="submit" id="submit" value="Submit" class="submit">
+    </div>
+</form>
+<iframe id="IFRAME" name="IFRAME" style="display: none;"></iframe>
+</body>
+    <script src="JS/register.js"></script>
+</html>

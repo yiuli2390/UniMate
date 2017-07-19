@@ -1,0 +1,64 @@
+.FollowingCard{
+    display: inline-block;
+    width: 200px;
+    border:solid 1px #CCCCCC;
+    vertical-align: top;
+    border-radius: 2px;
+    overflow: hidden;
+    border-radius: 2px;
+    font-family: clementepdaelight;
+    margin-left: 8px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.FollowingCard img{
+    width: 200px;
+    height: 200px;
+    box-shadow: 0 2px 1px 1px #E6EAEE;
+    display: block;
+}
+
+.FollowingCard .line{
+    display: block;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    text-align: center;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.FollowingCard .line label{
+    display: inline-block;
+}
+
+.FollowingCard .line a{
+    font-family: clementepdahbookitalic;
+}
+
+.FollowingCard  button{
+    display: block;
+    margin: 0 auto;
+    border: none;
+    height: 30px;
+    font-size: 15px;
+    font-family: clementepdaksemibold;
+    cursor: pointer;
+    background-color: #1C68A4;
+    color: #FFFFFF;
+    border-radius: 2px;
+}
+
+.FollowingCard  button:hover{
+    box-shadow: 0 0 1px 1px #CCCCCC;
+    border-radius: 2px;
+    color: #CFD9E3;
+}
+
+.FollowingCard .line .online{
+    color: #1AAF5E;
+}
+
+.FollowingCard .line .offline{
+    color: #CCCCCC;
+}

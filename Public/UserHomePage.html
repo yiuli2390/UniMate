@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>User Home Page</title>
+    <link rel="stylesheet" href="FONT/Clemente/stylesheet.css">
+    <link rel="stylesheet" href="FONT/coolvetica/stylesheet.css">
+    <link rel="stylesheet" href="CSS/HomePage.css">
+</head>
+<body>
+<div id="content">
+    <div id="left" class="column">
+
+        <div id="UserBox">
+            <div id="theme">
+                <div id="themeTitle">CREATE NEW THEME<b></b></div>
+                <input type="text" id="themeInput" placeholder="Input your theme name" onfocus="this.placeholder=''"
+                       onblur="this.placeholder='Input your theme name'">
+            </div>
+            <div id="autoHide">
+                <div id="tagsArea">
+                    <div id="tags">
+                    </div>
+                    <div id="tagInput">
+                        <input type="text" id="tagInputBox" placeholder="Add a tag for your theme">
+                        <input type="button" id="postTagButton" value="POST">
+                    </div>
+                </div>
+                <div id="UserButtons">
+                    <button id="submitBtn">CREATE</button>
+                    <button id="cancelBtn">CANCEL</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div id="right" class="column"></div>
+</div>
+</body>
+    <script src="JS/UserHomePage.js"></script>
+</html>
